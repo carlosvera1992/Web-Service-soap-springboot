@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:tns="http://www.cvera.com/webservices/schemas"
+	targetNamespace="http://www.cvera.com/webservices/schemas"
+	elementFormDefault="qualified">
+	<!-- List of Operations -->
+	<!-- Request -->
+	<xsd:element name="registrarUserRequest">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="nombreCompleto" type="xsd:string" />
+				<xsd:element name="tipoDocumento"
+					type="tns:TipoDocumento" />
+				<xsd:element name="numeroDocumento">
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:int">
+							<xsd:totalDigits value="10" />
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="registrarUserResponse">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="codigoResponse" type="xsd:int" />
+				<xsd:element name="mensajeRespuesta" type="xsd:string" />
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+
+	<xsd:element name="consultarUserRequest">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="tipoDocumento"
+					type="tns:TipoDocumento" />
+				<xsd:element name="numeroDocumento">
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:int">
+							<xsd:totalDigits value="10" />
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:element>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+
+	<xsd:element name="consultarUserResponse">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="nombreUser" type="xsd:string" />
+				<xsd:element name="codigoResponse" type="xsd:int" />
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+
+	<xsd:simpleType name="TipoDocumento">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="CC" />
+			<xsd:enumeration value="TI" />
+		</xsd:restriction>
+	</xsd:simpleType>
+
+</xsd:schema>
