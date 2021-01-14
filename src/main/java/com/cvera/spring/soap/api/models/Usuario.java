@@ -60,6 +60,12 @@ public class Usuario {
 	public void setNumeroDocumento(int numeroDocumento) {
 		this.numeroDocumento = numeroDocumento;
 	}
+
+	@Override
+	public String toString() {
+		return "Usuario [id=" + id + ", nombre=" + nombre + ", tipoDocumento=" + tipoDocumento + ", numeroDocumento="
+				+ numeroDocumento + "]";
+	}
 	
 	
 	

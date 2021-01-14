@@ -2,7 +2,7 @@
 // Este archivo ha sido generado por la arquitectura JavaTM para la implantación de la referencia de enlace (JAXB) XML v2.2.7 
 // Visite <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
 // Todas las modificaciones realizadas en este archivo se perderán si se vuelve a compilar el esquema de origen. 
-// Generado el: 2021.01.13 a las 11:25:36 PM COT 
+// Generado el: 2021.01.14 a las 07:40:43 AM COT 
 //
 
 
@@ -25,8 +25,9 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="nombreUser" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         &lt;element name="codigoResponse" type="{http://www.w3.org/2001/XMLSchema}int"/>
+ *         &lt;element name="mensajeRespuesta" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *         &lt;element name="nombreUser" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -37,15 +38,58 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "nombreUser",
-    "codigoResponse"
+    "codigoResponse",
+    "mensajeRespuesta",
+    "nombreUser"
 })
 @XmlRootElement(name = "consultarUserResponse")
 public class ConsultarUserResponse {
 
+    protected int codigoResponse;
+    @XmlElement(required = true)
+    protected String mensajeRespuesta;
     @XmlElement(required = true)
     protected String nombreUser;
-    protected int codigoResponse;
+
+    /**
+     * Obtiene el valor de la propiedad codigoResponse.
+     * 
+     */
+    public int getCodigoResponse() {
+        return codigoResponse;
+    }
+
+    /**
+     * Define el valor de la propiedad codigoResponse.
+     * 
+     */
+    public void setCodigoResponse(int value) {
+        this.codigoResponse = value;
+    }
+
+    /**
+     * Obtiene el valor de la propiedad mensajeRespuesta.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getMensajeRespuesta() {
+        return mensajeRespuesta;
+    }
+
+    /**
+     * Define el valor de la propiedad mensajeRespuesta.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setMensajeRespuesta(String value) {
+        this.mensajeRespuesta = value;
+    }
 
     /**
      * Obtiene el valor de la propiedad nombreUser.
@@ -69,22 +113,6 @@ public class ConsultarUserResponse {
      */
     public void setNombreUser(String value) {
         this.nombreUser = value;
-    }
-
-    /**
-     * Obtiene el valor de la propiedad codigoResponse.
-     * 
-     */
-    public int getCodigoResponse() {
-        return codigoResponse;
-    }
-
-    /**
-     * Define el valor de la propiedad codigoResponse.
-     * 
-     */
-    public void setCodigoResponse(int value) {
-        this.codigoResponse = value;
     }
 
 }

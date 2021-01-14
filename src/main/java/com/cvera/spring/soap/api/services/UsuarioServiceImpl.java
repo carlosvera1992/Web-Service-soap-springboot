@@ -2,6 +2,7 @@ package com.cvera.spring.soap.api.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.cvera.spring.soap.api.models.Usuario;
 import com.cvera.spring.soap.api.repository.IUsuarioRepository;
@@ -14,15 +15,15 @@ public class UsuarioServiceImpl implements IUsuarioService{
 	private IUsuarioRepository repository;
 
 	@Override
+	@Transactional
 	public Usuario registrarUsuario(Usuario usuario) {
-		Usuario user = repository.save(usuario);
-		return user;
+		return repository.save(usuario);
 	}
 
 	@Override
+	@Transactional(readOnly = true)
 	public Usuario consultarUsuario(String tipoDocumento, int numeroDocumento) {
-		Usuario user = repository.consultarUsuario(tipoDocumento, numeroDocumento);
-		return user;
+		return repository.consultarUsuario(tipoDocumento, numeroDocumento);
 	}
 	
 	

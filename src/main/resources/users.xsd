@@ -52,8 +52,9 @@
 	<xsd:element name="consultarUserResponse">
 		<xsd:complexType>
 			<xsd:sequence>
-				<xsd:element name="nombreUser" type="xsd:string" />
 				<xsd:element name="codigoResponse" type="xsd:int" />
+				<xsd:element name="mensajeRespuesta" type="xsd:string" />
+				<xsd:element name="nombreUser" type="xsd:string" />
 			</xsd:sequence>
 		</xsd:complexType>
 	</xsd:element>

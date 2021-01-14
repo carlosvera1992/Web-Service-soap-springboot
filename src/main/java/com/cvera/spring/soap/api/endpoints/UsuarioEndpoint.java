@@ -18,76 +18,82 @@ import com.cvera.webservices.schemas.RegistrarUserResponse;
 
 @Endpoint
 public class UsuarioEndpoint {
-	
+
 	@Autowired
 	private IUsuarioService usuarioService;
-	
+
 	public String mensaje = "No fue posible registrar el usuario";
 	public int codigoRespuesta = 1;
 
 	private static final String NAMESPACE_URI = "http://www.cvera.com/webservices/schemas";
-	
+
 	private static final Logger log = LoggerFactory.getLogger(UsuarioEndpoint.class);
-	
+
 	@PayloadRoot(namespace = NAMESPACE_URI, localPart = "registrarUserRequest")
 	@ResponsePayload
 	public RegistrarUserResponse registrarUsuario(@RequestPayload RegistrarUserRequest request) {
-		
+
 		log.info("Ingresando al Endpoint registrar");
 		RegistrarUserResponse registrarUserResponse = new RegistrarUserResponse();
-		
+
 		Usuario usuario = new Usuario();
 		usuario.setNombre(request.getNombreCompleto());
-		
+
 		if (request.getTipoDocumento().name().equals(TipoDocumentoEnum.CC.name())) {
 			usuario.setTipoDocumento(TipoDocumentoEnum.CC.name());
-		}else {
+		} else {
 			usuario.setTipoDocumento(TipoDocumentoEnum.TI.name());
 		}
 		usuario.setNumeroDocumento(request.getNumeroDocumento());
-		
-		Usuario UsuarioInsertado = usuarioService.registrarUsuario(usuario);
-		
-		if (UsuarioInsertado.getId() == null) {
+
+		Usuario usuarioInsertado = usuarioService.registrarUsuario(usuario);
+
+		log.info(usuarioInsertado.toString());
+
+		if (usuarioInsertado != null) {
 			codigoRespuesta = 0;
 			mensaje = "Usuario registrado correctamente";
 		}
-		
+
 		registrarUserResponse.setCodigoResponse(codigoRespuesta);
 		registrarUserResponse.setMensajeRespuesta(mensaje);
 		log.info("Saliendo del metodo Endpoint registrar");
-		
-		return registrarUserResponse;
-		
-	}
-	
-	
 
+		return registrarUserResponse;
+
+	}
+
+	@SuppressWarnings("unused")
 	@PayloadRoot(namespace = NAMESPACE_URI, localPart = "consultarUserRequest")
 	@ResponsePayload
 	public ConsultarUserResponse consultarUsuario(@RequestPayload ConsultarUserRequest request) {
 		log.info("Ingresando al Endpoint Consultar");
-		
+		mensaje = "No fue posible realizar la consulta";
+
 		ConsultarUserResponse consultarUserResponse = new ConsultarUserResponse();
-		
-		
-	    String tipoDocumento = request.getTipoDocumento().name();
+
+		String tipoDocumento = request.getTipoDocumento().name();
 		int numeroDocumento = request.getNumeroDocumento();
-		
+
 		Usuario usuarioConsultado = usuarioService.consultarUsuario(tipoDocumento, numeroDocumento);
-		
-		if (usuarioConsultado == null) {
+
+		log.info(usuarioConsultado.toString());
+
+		if (usuarioConsultado != null) {
 			codigoRespuesta = 0;
 			mensaje = "Usuario encontrado correctamente";
+			consultarUserResponse.setCodigoResponse(codigoRespuesta);
+			consultarUserResponse.setNombreUser(usuarioConsultado.getNombre());
+			consultarUserResponse.setMensajeRespuesta(mensaje);
+		} else {
+			consultarUserResponse.setCodigoResponse(codigoRespuesta);
+			consultarUserResponse.setMensajeRespuesta(mensaje);
 		}
-		
-		consultarUserResponse.setCodigoResponse(codigoRespuesta);
-		consultarUserResponse.setNombreUser(usuarioConsultado.getNombre());
-		
+
 		log.info("Saliendo del metodo Endpoint Consultar");
-		
+
 		return consultarUserResponse;
-		
+
 	}
 
 }
