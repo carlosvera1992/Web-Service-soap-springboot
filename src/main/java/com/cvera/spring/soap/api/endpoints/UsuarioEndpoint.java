@@ -68,27 +68,22 @@ public class UsuarioEndpoint {
 	@ResponsePayload
 	public ConsultarUserResponse consultarUsuario(@RequestPayload ConsultarUserRequest request) {
 		log.info("Ingresando al Endpoint Consultar");
-		mensaje = "No fue posible realizar la consulta";
 
 		ConsultarUserResponse consultarUserResponse = new ConsultarUserResponse();
 
 		String tipoDocumento = request.getTipoDocumento().name();
 		int numeroDocumento = request.getNumeroDocumento();
+		Usuario usuarioConsultado = null;
 
-		Usuario usuarioConsultado = usuarioService.consultarUsuario(tipoDocumento, numeroDocumento);
-
-		log.info(usuarioConsultado.toString());
-
-		if (usuarioConsultado != null) {
-			codigoRespuesta = 0;
-			mensaje = "Usuario encontrado correctamente";
-			consultarUserResponse.setCodigoResponse(codigoRespuesta);
+			usuarioConsultado = usuarioService.consultarUsuario(tipoDocumento, numeroDocumento);
+			if (usuarioConsultado == null) {
+				consultarUserResponse.setCodigoResponse(1);
+				consultarUserResponse.setMensajeRespuesta("El usuario no existe en la base de datos");
+				return consultarUserResponse;
+			}
+			consultarUserResponse.setCodigoResponse(0);
+			consultarUserResponse.setMensajeRespuesta("Consulta realizada éxitosamente");
 			consultarUserResponse.setNombreUser(usuarioConsultado.getNombre());
-			consultarUserResponse.setMensajeRespuesta(mensaje);
-		} else {
-			consultarUserResponse.setCodigoResponse(codigoRespuesta);
-			consultarUserResponse.setMensajeRespuesta(mensaje);
-		}
 
 		log.info("Saliendo del metodo Endpoint Consultar");
 

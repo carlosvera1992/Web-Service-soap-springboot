@@ -5,7 +5,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import com.cvera.spring.soap.api.models.Usuario;
-import com.cvera.spring.soap.api.utils.TipoDocumentoEnum;
 
 @Repository
 public interface IUsuarioRepository extends JpaRepository<Usuario, Integer>{

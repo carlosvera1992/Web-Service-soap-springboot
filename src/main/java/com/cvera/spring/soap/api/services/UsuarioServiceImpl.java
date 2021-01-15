@@ -6,7 +6,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.cvera.spring.soap.api.models.Usuario;
 import com.cvera.spring.soap.api.repository.IUsuarioRepository;
-import com.cvera.spring.soap.api.utils.TipoDocumentoEnum;
 
 @Service
 public class UsuarioServiceImpl implements IUsuarioService{
